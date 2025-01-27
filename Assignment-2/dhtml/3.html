@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul{
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        ul li{
+            display: inline-block;
+            border: 1px solid black;
+            background-color: #dad8d8;
+            padding: 5px;
+            margin: 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" name="" id="techName" placeholder="Enter a Language">
+    <button onclick="addTech()">Add</button>
+    <ul id="tech">
+        <li>C</li>
+        <li>C++</li>
+    </ul>
+
+    <script>
+        // let newLi = "<li>Java</li>";
+        // document.getElementById("tech").innerHTML = newLi
+        
+        // let newLi = document.createElement("li")
+        // newLi.innerHTML = "Java"
+        // newLi.className = "mystyle"
+        // console.log(newLi);
+        // document.getElementById("tech").appendChild(newLi)
+
+        function addTech(){
+            let name = document.getElementById("techName").value
+            console.log(name);
+
+            if(name == ""){
+                alert("Plese enter a language");
+                return
+            }
+            let newLi = document.createElement("li")
+            newLi.innerHTML = name
+            document.getElementById("tech").appendChild(newLi)
+            document.getElementById("techName").value = ""
+        }
+        
+    </script>
+</body>
+</html>

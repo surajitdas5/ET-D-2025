@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .mystyle{
+            background-color: black;
+            color: white;
+            text-decoration: underline;
+            font-size: 75px;
+        }
+        .mystyle-2{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="html">HTML</h1>
+    <button onclick="changeStyle()">Change Style</button>
+    <button onclick="removeStyle()">Remove Style</button>
+    <button onclick="toggleStyle()">Toggle Style</button>
+    <button onclick="toggleShow()">Show/Hide</button>
+    <h1>CSS</h1>
+    <h1>JS</h1>
+    <h1>jQuery</h1>
+
+
+    <script>
+        let html = document.getElementById("html")
+
+        console.log(html);
+
+        // html.innerText = "Hello JS"
+        // html.innerHTML = "<u>Hello JS</u>"
+        // html.innerText = "<u>Hello JS</u>"
+        
+        // let h1s = document.getElementsByTagName("h1")
+        // console.log(h1s);
+        // h1s[2].innerHTML ="Java Script"
+
+        // html.style.color = 'red'
+        // html.style.backgroundColor = 'yellow'
+        // html.style.fontSize = '100px'
+
+        // html.classList.add("mystyle")
+
+        function changeStyle(){
+            html.classList.add("mystyle")
+        }
+
+        function removeStyle(){
+            html.classList.remove("mystyle")
+        }
+        
+        function toggleStyle(){
+            html.classList.toggle("mystyle")
+        }
+
+        function toggleShow(){
+            html.classList.toggle("mystyle-2")
+        }
+        
+    </script>
+
+</body>
+</html>

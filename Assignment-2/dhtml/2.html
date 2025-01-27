@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button{
+            margin: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <div id="buttons"></div>
+
+
+    <script>
+        // let langs = ["C", "C++", "Java", "Python"]
+
+        // let listStr = "<ul>";
+        // for(let i=0; i<langs.length; i++){
+        //     listStr += "<li>"
+        //     listStr += langs[i]
+        //     listStr += "</li>"
+        // }
+        // listStr += "</ul>"
+
+        // console.log(listStr);
+        
+        // document.getElementById("container").innerHTML = listStr
+
+        let nums = [1, 23, 12, 54, 60, 100, 50]
+
+        let buttonStr = "";
+        for(let i=0; i<nums.length; i++){
+            buttonStr += "<button onclick=showNum("+nums[i]+")>"
+            buttonStr += nums[i]
+            buttonStr += "</button>"
+        }
+
+        function showNum(num){
+            alert("You have clicked on "+num)
+        }
+
+        document.getElementById("buttons").innerHTML = buttonStr
+
+    </script>
+</body>
+</html>

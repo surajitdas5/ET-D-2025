@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add Numbers</h1>
+    <div id="inputs">
+        <input type="text" name="nums" placeholder="Enter a number"><br>
+        <input type="text" name="nums" placeholder="Enter a number"><br>
+    </div>
+
+    <button onclick="addMore()">Add More</button>
+    <button onclick="add()">Add</button>
+
+    <p id="res"></p>
+    
+    <script>
+        function addMore(){
+            let parent = document.getElementById("inputs")
+
+            let newInput = document.createElement("input")
+            newInput.type = "text"
+            newInput.name = "nums"
+            newInput.placeholder = "Enter a number"
+
+            let newBtn = document.createElement("button")
+            newBtn.innerHTML ="X"
+            newBtn.onclick = function(){
+                parent.removeChild(newInput)
+                parent.removeChild(newBtn)
+                parent.removeChild(newBr)
+            }
+
+
+            let newBr = document.createElement("br")
+
+            parent.appendChild(newInput)
+            parent.appendChild(newBtn)
+            parent.appendChild(newBr)
+        }
+
+        function add(){
+            let inputs = document.getElementsByName("nums")
+            let sum = 0;
+
+            for(let i=0; i<inputs.length; i++){
+                let n = inputs[i].value
+                if(n == "" || isNaN(n)){
+                    alert("Enter valid numbers in the input")
+                    return
+                }
+                console.log(n);
+                sum += parseFloat(n)
+            }
+            document.getElementById("res").innerHTML = sum
+
+            for(let i=0; i<inputs.length; i++){
+                inputs[i].value =""
+            }
+        }
+    </script>
+</body>
+</html>
