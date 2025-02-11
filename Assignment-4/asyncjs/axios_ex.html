@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody id="userData"></tbody>
+    </table>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        let url = "https://jsonplaceholder.typicode.com/users"
+        async function getData() {   
+            let response = await axios.get(url)
+            console.log(response.data);
+
+            let users = response.data
+
+            let output = ``;
+            users.forEach ( user => {
+                let {name, email, address} = user
+                output += `
+                    <tr>
+                        <td>${name}</td>
+                        <td>${email}</td>
+                        <td>${address?.city}, ${address?.street}</td>
+                    </tr>
+                `
+            })
+            console.log(output);
+            document.getElementById("userData").innerHTML = output
+        }
+        
+        getData()
+    </script>
+</body>
+</html>
