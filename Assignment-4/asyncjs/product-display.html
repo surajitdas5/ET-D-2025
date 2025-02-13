@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #container{
+            display: flex;
+            flex-wrap: wrap;
+            width: 90%;
+            margin: auto;
+        }
+        .product{
+            border: 1px solid #d0d0d0;
+            padding: 10px;
+            margin: 8px;
+            border-radius: 4px;
+            width: 150px;
+        }
+        .product p{
+            margin: 8px 0px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        let url = "http://localhost:3000/product"
+
+        async function getData() {
+            let response = await axios.get(url)
+            console.log(response);
+            let products = response.data
+            let op = ``;
+            products.forEach( p => {
+                op+= `
+                    <div class='product'>
+                        <h5>${p.name}</h5>
+                        <p>${p.price}</p>
+                        <a href="product-update.html?pid=${p.id}">Update</a>
+                        <a href="product-delete.html?pid=${p.id}">Delete</a>
+                    </div>
+                `
+            })
+            document.getElementById("container").innerHTML = op
+        }
+        getData()
+    </script>
+</body>
+</html>

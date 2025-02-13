@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            display: block;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add Product</h1>
+    <form action="" method="post" onsubmit="add(event)">
+        <input type="text" id="name" placeholder="Product Name">
+        <input type="text" id="price" placeholder="Product Price">
+        <input type="submit" value="ADD">
+    </form>
+    <p id="res"></p>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        let res = document.getElementById("res");
+        async function add(e){
+            try {
+                e.preventDefault()
+                let name = document.getElementById("name").value
+                let price = document.getElementById("price").value
+                console.log(name, price);
+                let url = "http://localhost:3000/product"
+                let response = await axios.post(url, {"name": name, "price": price})
+                console.log(response);
+
+                if(response.status === 201){
+                    res.innerHTML = "Product Added";
+                    document.getElementById("name").value = "" 
+                    document.getElementById("price").value = ""
+                }
+            } catch (error) {
+                console.log(error);
+                res.innerHTML = "Product Not Added";
+            }
+            
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            display: block;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Update Product</h1>
+    <form action="" method="post" onsubmit="update(event)">
+        <input type="text" id="name" placeholder="Product Name">
+        <input type="text" id="price" placeholder="Product Price">
+        <input type="submit" value="Update">
+    </form>
+    <p id="res"></p>
+    <a href="product-display.html">Back</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        let res = document.getElementById("res");
+        let ulrParams = new URLSearchParams(window.location.search)
+        let id = ulrParams.get("pid");
+        console.log(id);
+        let url = "http://localhost:3000/product"
+        url = url+"/"+id
+
+        async function getProduct() {
+            let response = await axios.get(url)
+            let product = response.data
+            console.log(product);
+            document.getElementById("name").value = product.name
+            document.getElementById("price").value = product.price
+        }
+
+        getProduct()
+
+        async function update(e){
+            try {
+                e.preventDefault()
+                let name = document.getElementById("name").value
+                let price = document.getElementById("price").value
+                console.log(name, price);
+                let response = await axios.put(url, {"name": name, "price": price})
+                console.log(response);
+
+                if(response.status === 200){
+                    res.innerHTML = "Product Updated";
+                    document.getElementById("name").value = "" 
+                    document.getElementById("price").value = ""
+                }
+            } catch (error) {
+                console.log(error);
+                res.innerHTML = "Product Not Updated";
+            }
+            
+        }
+    </script>
+</body>
+</html>
