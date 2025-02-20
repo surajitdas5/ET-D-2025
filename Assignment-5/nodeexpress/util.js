@@ -14,6 +14,7 @@ class Student{
     }
 }
 
+// Default Export
 let s = new Student();
 module.exports = s
 
@@ -21,6 +22,7 @@ module.exports = s
 // module.exports = sub
 // module.exports = PI
 
+// Named Export
 // module.exports = {"add": add, "sub": sub, "PI": PI}
 // module.exports = {"sum": add, "sub": sub, "PI": PI}
 // module.exports = {add, sub, PI}
