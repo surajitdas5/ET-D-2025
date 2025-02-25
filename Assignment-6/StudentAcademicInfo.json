@@ -1,0 +1,62 @@
+[
+    {
+        "rollno": 101,
+        "program": "B.Tech",
+        "branch": "Computer Science",
+        "cgpa": 8.8
+    },
+    {
+        "rollno": 102,
+        "program": "B.Tech",
+        "branch": "Mechanical Engineering",
+        "cgpa": 9.5
+    },
+    {
+        "rollno": 103,
+        "program": "B.Tech",
+        "branch": "Electrical Engineering",
+        "cgpa": 8.9
+    },
+    {
+        "rollno": 104,
+        "program": "B.Tech",
+        "branch": "Civil Engineering",
+        "cgpa": 7.7
+    },
+    {
+        "rollno": 105,
+        "program": "B.Tech",
+        "branch": "Electrical Engineering",
+        "cgpa": 9.0
+    },
+    {
+        "rollno": 106,
+        "program": "B.Tech",
+        "branch": "Information Technology",
+        "cgpa": 9.6
+    },
+    {
+        "rollno": 107,
+        "program": "M.Tech",
+        "branch": "Aerospace Engineering",
+        "cgpa": 9.9
+    },
+    {
+        "rollno": 108,
+        "program": "M.Tech",
+        "branch": "Biotechnology",
+        "cgpa": 8.8
+    },
+    {
+        "rollno": 109,
+        "program": "B.Tech",
+        "branch": "Computer Science",
+        "cgpa": 9.7
+    },
+    {
+        "rollno": 110,
+        "program": "B.Tech",
+        "branch": "Computer Science",
+        "cgpa": 9.0
+    }
+]
