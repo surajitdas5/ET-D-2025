@@ -13,7 +13,7 @@ async function getUserById(req, res){
     try {
         // let data = req.params
         let { id } = req.params
-        console.log(id);
+        // console.log(id);
         let user = await User.findOne({_id: id})
         res.send(user)
     } catch (error) {

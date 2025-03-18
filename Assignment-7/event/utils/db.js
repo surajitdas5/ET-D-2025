@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
-const DB_URL = "YOUR_DB_STRING"
-const DB_NAME = "event-d"
 
 async function dbConnect(){
+    const DB_URL = process.env.DB_URL
+    const DB_NAME = process.env.DB_NAME
     try {
         await mongoose.connect(`${DB_URL}/${DB_NAME}`)
         console.log("Databse Connected")
