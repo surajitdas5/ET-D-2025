@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose")
 const Event = require("./../models/event.model.js")
 
 const addEvent = async (req, res) =>{
@@ -6,6 +7,7 @@ const addEvent = async (req, res) =>{
         let fileName = req.file.filename
         event.eventImage = fileName
         event.status = 'active'
+        event.user = req.user.id
         console.log(event)
         event = await Event.create(event)
         res.status(201).send(event)
@@ -64,6 +66,16 @@ const updateEvent = async (req, res) => {
     try {
         let { id } = req.params
         let event = req.body
+        let userId = new mongoose.Types.ObjectId(req.user.id)
+        let exEvent = await Event.findOne({_id: id, user: userId})
+        console.log(exEvent)
+        // console.log(userId)
+        if(!exEvent){
+            return res.status(400).send({"message": "Invalid Request"})
+        } 
+        // else if(exEvent.user !=  userId){
+        //     return res.status(401).send({"message": "Unauthorised access"})
+        // }
         event = await Event.findByIdAndUpdate({_id: id}, event, {new: true}).populate("user", "-password");
         let modEvent =  {
             ...event.toObject(),
