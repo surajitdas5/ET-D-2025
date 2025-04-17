@@ -1,11 +1,17 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
+import { getUserFromToken } from '../utils/utilityFunctions'
+import { useAuth } from '../context/AuthContext'
+import { API } from '../utils/constants'
 
 const EventDetails = () => {
+    const { token } = useAuth()
     const { id } = useParams()
     const navigate = useNavigate();
     const [ event, setEvent ] = useState({})
+
+    const isOwner = event?.user?._id == getUserFromToken()
 
     const getEventDetails = async() => {
         try{
@@ -24,6 +30,25 @@ const EventDetails = () => {
     useEffect(()=>{
         getEventDetails();
     }, [id])
+
+    const handleDelete = async() => {
+        let res = confirm("Are you sure?")
+        if(res){
+            try {
+                let response = await axios.delete(`${API}/events/${event._id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                if(response.status === 200){
+                    navigate("/")
+                } 
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+
   return (
     <div className='row g-2'>
         <div className="col-md-6">
@@ -40,6 +65,12 @@ const EventDetails = () => {
                     <span className='d-block fw-semibold'>{event?.user?.name}</span>
                     <span className='d-block'>{event?.user?.mobile}</span>
                 </div>
+                { isOwner &&
+                    <div className="card-footer">
+                        <Link to={`/update/${event._id}`} className='btn btn-info me-2'> Update</Link>
+                        <button onClick={handleDelete} className='btn btn-danger'>Delete</button>
+                    </div>
+                }
             </div>
         </div>
     </div>

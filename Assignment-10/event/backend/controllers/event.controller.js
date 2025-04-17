@@ -1,5 +1,7 @@
+const fs = require('fs')
 const { default: mongoose } = require("mongoose")
 const Event = require("./../models/event.model.js")
+const path = require('path')
 
 const addEvent = async (req, res) =>{
     try {
@@ -99,6 +101,31 @@ const updateEventImage = async (req, res) =>{
     }
 }
 
+const deleteEvent = async (req, res) => {
+    try {
+        let { id } = req.params
+        let event = req.body
+        let userId = new mongoose.Types.ObjectId(req.user.id)
+        let exEvent = await Event.findOne({_id: id, user: userId})
+        // console.log(exEvent)
+        // console.log(userId)
+        if(!exEvent){
+            return res.status(400).send({"message": "Invalid Request"})
+        } 
+        event = await Event.findByIdAndDelete({_id: id});
+        // let filePath = path.join(__dirname, "uploads", event.eventImage)
+        let filePath = `./uploads/${event.eventImage}`
+        console.log(filePath)
+        if(fs.existsSync(filePath)){
+            fs.unlinkSync(filePath)
+        }
+        res.status(200).send(event)
+    } catch (error) {
+        console.log(error)
+        res.status(400).send({"message": error.message})
+    }
+}
+
 
 // Search events by title
 const searchEventsByTitle = async (req, res) => {
@@ -138,5 +165,6 @@ module.exports = {
     upcomingEvents,
     updateEvent,
     updateEventImage,
+    deleteEvent,
     searchEventsByTitle
 }
